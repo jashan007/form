@@ -1,0 +1,43 @@
+<p>signup-form works!</p>
+
+<form [formGroup]="form" (ngSubmit)="login()">
+  <div *ngIf="form.errors" class="alert alert-danger">
+    The username or password is invalid
+  </div>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input
+      formControlName="user-name"
+      id="username"
+      type="text"
+      class="form-control"
+    />
+    <div *ngIf="username.pending">Checking for uniquess..</div>
+    <div
+      *ngIf="username.touched && form.get('user-name').invalid"
+      class="alert alert-danger"
+    >
+      <div *ngIf="username.errors.required">Username is required</div>
+      <div *ngIf="username.errors.minlength">
+        Username should be minimum
+        {{ username.errors.minlength.requiredLength }}
+      </div>
+      <div *ngIf="username.errors.cannotContainSpace">
+        Username cannot contain space
+      </div>
+      <div *ngIf="username.errors.shouldBeUnique">Username is aleady taken</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      formControlName="password"
+      id="password"
+      text="text"
+      class="form-control"
+    />
+  </div>
+  <button class="btn btn-primary" type="submit">Sign me up</button>
+</form>
+
+
